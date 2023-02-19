@@ -1,24 +1,19 @@
-const btn = document.querySelector('.generate');
-const cats = document.querySelector('.removal-container')
-/*const cont = document.querySelector('.cats-container');*/
+const genBtn = document.querySelector('.wrapper__btnGen');
+const backBtn = document.querySelector('.btnBack');
+const cats = document.querySelector('.cats--remove')
 const loader = document.querySelector('.loader'); 
-let catsImageDiv = document.querySelector('.cats-images') 
-
-
+let catsImageDiv = document.querySelector('.cats__images') 
 
 // Function remove container
 
 const removeContainer = () => {
-  //e.preventDefault();
   cats.style.display = 'none';
 }
 
-
-// get Cat images
+// Get Cat images
 
 const catsImages = async () => {
    
-    
     try {
       catsImageDiv.innerHTML = '';
       showLoader();
@@ -32,28 +27,32 @@ const catsImages = async () => {
       catsImageEl.classList.toggle('size');
       catsImageDiv.appendChild(catsImageEl);
 
-    }, 2000)
+    }, 1000)
   
   } catch (e) {
-      console.log('Don`t Worry, Simple Error :p');
+      console.log('Something went wrong. Please try again :)');
   }
-
 }
 
-
 // show loader
+
 function showLoader() {
-  loader.style.display = 'block'
-  setTimeout(() => { 
     loader.style.display = 'none'
+    setTimeout(() => { 
+      loader.style.display = 'block'
   }, 1000)
 }
 
 // Event Listeners
 
-btn.addEventListener('click', () => {
+genBtn.addEventListener('click', () => {
   removeContainer();
   catsImages();
+  catsImageDiv.style.display = 'block';
 });
 
-// btn.addEventListener('click', catsImages);
+backBtn.addEventListener('click', () => {
+  loader.style.display = 'none';
+  catsImageDiv.style.display = 'none';
+  cats.style.display = 'flex';
+});
